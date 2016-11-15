@@ -27,7 +27,8 @@ class Database {
      */
     public function __construct() {
         $this->connect = mysqli_connect('localhost', 'root', 'balls', $this->db_name);
-        $this->getSQLError();        
+        $this->getSQLError(); 
+        return $this->connect;
     }
     
     public function __set($name, $value) {
@@ -53,8 +54,7 @@ class Database {
      */
     protected static function getConnect(){
         /*Enter Your connection credentials on line 43 mysqli_connect($host, $user, $password, $database, $port, $socket)*/
-        $database = new self();
-        $connect = mysqli_connect('localhost', 'root', 'balls', $database->db_name);
+        $connect = new self();
         return $connect;
     }
     
