@@ -11,11 +11,11 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title></title>
+        <title>Dealership</title>
     </head>
     <body>
         <?php
-        // put your code here
+            echo "to be continued";
         ?>
     </body>
 </html>
