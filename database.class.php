@@ -22,6 +22,7 @@ class Database {
     protected $tableName; //to be overwritten
     protected $id;  //assuming everything should have an id
     protected $fields = array();
+    public $properties = []; //dynamic properties array, not sure if this is how we want to do it
     /**
      * construct to initialize connect
      */
@@ -31,13 +32,24 @@ class Database {
         return $this->connect;
     }
     
+    // <editor-fold defaultstate="collapsed" desc="magic get set isset">
+    
     public function __set($name, $value) {
-        $this->$name = $value;
+        $this->properties[$name] = $value;
     }
 
+
     public function __get($name) {
-        return $this->$name;
+        if (isset($this->properties[$name])) {
+            return $this->properties[$name];
+        }
     }
+    
+    public function __isset($name) {
+        return isset($this->properties[$name]);
+    }
+
+    // </editor-fold>
     
     /**
      * gets the most recent myslq error and echos it
