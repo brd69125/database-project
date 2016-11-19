@@ -24,6 +24,7 @@ session_start();    //start $_SESSION
 //php includes
 function getIncludes(){
     include_once("database.class.php");
+    include_once("nav_bar.class.php");
 }
 
 //echo JS files

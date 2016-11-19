@@ -16,6 +16,9 @@
     <body>
         <?php
             include_once("shell.php");
+            $nav = new Nav_Bar();
+            echo $nav->getDisplay();
+            echo $nav->displayCurrentPage();
         ?>
     </body>
 </html>
