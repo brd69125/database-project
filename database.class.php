@@ -20,7 +20,7 @@ class Database {
     protected $connect;
     protected $db_name = "dealership";
     protected $tableName; //to be overwritten
-    protected $id;  //assuming everything should have an id
+    //protected $id;  //assuming everything should have an id
     protected $fields = array();
     public $properties = []; //dynamic properties array, not sure if this is how we want to do it
     /**
