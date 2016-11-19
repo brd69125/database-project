@@ -15,7 +15,7 @@
     </head>
     <body>
         <?php
-            echo "to be continued";
+            include_once("shell.php");
         ?>
     </body>
 </html>
