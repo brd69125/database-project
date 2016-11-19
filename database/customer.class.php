@@ -16,8 +16,8 @@
  * @author Brody
  */
 class Customer extends Database{
-    public $fields = ["id","name","address","phone","type","email"];
-    
+    protected $fields = ["id","name","address","phone","type","email"];
+    protected $tableName = "customer";
 
     
 }
