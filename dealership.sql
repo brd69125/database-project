@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 19, 2016 at 08:11 PM
+-- Generation Time: Nov 19, 2016 at 10:28 PM
 -- Server version: 5.6.23-log
 -- PHP Version: 5.6.12
 
@@ -25,6 +25,19 @@ USE `dealership`;
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `bill`
+--
+
+CREATE TABLE IF NOT EXISTS `bill` (
+  `id` int(11) NOT NULL,
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `amount` int(11) NOT NULL,
+  `payment` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `customer`
 --
 
@@ -40,6 +53,21 @@ CREATE TABLE IF NOT EXISTS `customer` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `employee`
+--
+
+CREATE TABLE IF NOT EXISTS `employee` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `phone` int(11) DEFAULT NULL,
+  `type` varchar(255) NOT NULL COMMENT 'mechanic or sales'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `sale`
 --
 
@@ -48,7 +76,29 @@ CREATE TABLE IF NOT EXISTS `sale` (
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `custom_work` varchar(255) DEFAULT NULL,
   `customer` int(11) NOT NULL,
-  `vehicle` int(11) NOT NULL
+  `vehicle` int(11) NOT NULL,
+  `bill` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `service_ticket`
+--
+
+CREATE TABLE IF NOT EXISTS `service_ticket` (
+  `id` int(11) NOT NULL,
+  `pickup_date` date NOT NULL,
+  `arrival_date` date NOT NULL,
+  `completed_date` date NOT NULL,
+  `tasks` varchar(255) NOT NULL,
+  `work_time_est` int(11) NOT NULL,
+  `price_est` int(11) NOT NULL,
+  `bill` int(11) NOT NULL,
+  `vehicle` int(11) NOT NULL,
+  `mechanic` int(11) NOT NULL,
+  `arr_mile` int(11) NOT NULL COMMENT 'arrival mileage',
+  `dep_mile` int(11) NOT NULL COMMENT 'departure mileage'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -70,9 +120,21 @@ CREATE TABLE IF NOT EXISTS `vehicle` (
 --
 
 --
+-- Indexes for table `bill`
+--
+ALTER TABLE `bill`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `customer`
 --
 ALTER TABLE `customer`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `employee`
+--
+ALTER TABLE `employee`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -81,7 +143,17 @@ ALTER TABLE `customer`
 ALTER TABLE `sale`
   ADD PRIMARY KEY (`id`),
   ADD KEY `customer` (`customer`),
-  ADD KEY `vehicle` (`vehicle`);
+  ADD KEY `vehicle` (`vehicle`),
+  ADD KEY `bill` (`bill`);
+
+--
+-- Indexes for table `service_ticket`
+--
+ALTER TABLE `service_ticket`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `bill` (`bill`),
+  ADD KEY `vehicle` (`vehicle`),
+  ADD KEY `mechanic` (`mechanic`);
 
 --
 -- Indexes for table `vehicle`
@@ -94,14 +166,29 @@ ALTER TABLE `vehicle`
 --
 
 --
+-- AUTO_INCREMENT for table `bill`
+--
+ALTER TABLE `bill`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT for table `employee`
+--
+ALTER TABLE `employee`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT for table `sale`
 --
 ALTER TABLE `sale`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `service_ticket`
+--
+ALTER TABLE `service_ticket`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `vehicle`
@@ -117,7 +204,16 @@ ALTER TABLE `vehicle`
 --
 ALTER TABLE `sale`
   ADD CONSTRAINT `sale_ibfk_1` FOREIGN KEY (`customer`) REFERENCES `customer` (`id`),
-  ADD CONSTRAINT `sale_ibfk_2` FOREIGN KEY (`vehicle`) REFERENCES `vehicle` (`id`);
+  ADD CONSTRAINT `sale_ibfk_2` FOREIGN KEY (`vehicle`) REFERENCES `vehicle` (`id`),
+  ADD CONSTRAINT `sale_ibfk_3` FOREIGN KEY (`bill`) REFERENCES `bill` (`id`);
+
+--
+-- Constraints for table `service_ticket`
+--
+ALTER TABLE `service_ticket`
+  ADD CONSTRAINT `service_ticket_ibfk_1` FOREIGN KEY (`bill`) REFERENCES `bill` (`id`),
+  ADD CONSTRAINT `service_ticket_ibfk_2` FOREIGN KEY (`vehicle`) REFERENCES `vehicle` (`id`),
+  ADD CONSTRAINT `service_ticket_ibfk_3` FOREIGN KEY (`mechanic`) REFERENCES `employee` (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
