@@ -37,6 +37,7 @@ class Nav_Bar {
     }
     
     public function displayCurrentPage(){
+        $page = "<div class='content'>";
         //choose tab
         switch ($this->selected_page){
             case "sales":
@@ -46,13 +47,20 @@ class Nav_Bar {
                 ;
                 break;
             default :
-                ;//home
+                $page .= self::getHomePage();//home
                 break;
         }
+        $page .= "</div>";
+        echo $page;
     }
     
     public static function getNavButton($tab_name, $title){
         $button = "<button type='submit' form='nav' name='".self::$tab_key."' value='$tab_name' class='nav_button'>$title</button>";
         return $button;
+    }
+    
+    public static function getHomePage(){
+        $page = "<h1>Welcome to the Data Dealership</h1>";
+        return $page;
     }
 }
