@@ -18,12 +18,12 @@
 class Nav_Bar {
     
     protected $selected_page = "home";
-    protected $tab_key = "tab";
+    protected static $tab_key = "tab";
     protected static $tab_list = ['home' => 'Home','sales'=>'Sales','services'=>'Services'];
     
     public function __construct() {
-        if(isset($_GET[$this->tab_key])){
-            $this->selected_page = $_GET[$this->tab_key];
+        if(isset($_GET[self::$tab_key])){
+            $this->selected_page = $_GET[self::$tab_key];
         }
     }
     
@@ -52,7 +52,7 @@ class Nav_Bar {
     }
     
     public static function getNavButton($tab_name, $title){
-        $button = "<button type='submit' form='nav' name='$this->tab_key' value='$tab_name' class='nav_button'>$title</button>";
+        $button = "<button type='submit' form='nav' name='".self::$tab_key."' value='$tab_name' class='nav_button'>$title</button>";
         return $button;
     }
 }

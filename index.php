@@ -16,6 +16,8 @@
     <body>
         <?php
             include_once("shell.php");
+            $nav = new Nav_Bar();
+            echo $nav->getDisplay();
         ?>
     </body>
 </html>
