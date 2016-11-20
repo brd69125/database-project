@@ -16,6 +16,8 @@ class Sale extends Database{
     protected $fields = ["id","date","custom_work","customer","vehicle","bill"];
     protected $tableName = "sale";
     public $bill_obj; //for storing bill
+    public $vehicle_obj;
+    public $customer_obj;
     
     public static function getAllSales(){
         $sales = [];
@@ -29,6 +31,15 @@ class Sale extends Database{
             $bill = new Bill();
             $bill->load_by_id($row["bill"]);
             $sale->bill_obj = $bill;
+            
+            $vehicle = new Vehicle();
+            $vehicle->load_by_id($row["vehicle"]);
+            $sale->vehicle_obj = $vehicle;
+            
+            $customer = new Customer();
+            $customer->load_by_id($row["customer"]);
+            $sale->customer_obj = $customer;
+            
             $sales[] = $sale; //add to array
         }
         return $sales;
@@ -40,6 +51,9 @@ class Sale extends Database{
         $sale .= "<b>Custom Work</b>: {$this->custom_work}<br>";
         if(isset($this->bill_obj)){
             $sale .= "<b>Bill</b>: <br>" . $this->bill_obj->getDisplay();//should put this in containing div
+        }
+        if(isset($this->vehicle_obj)){
+            $sale .= "<b>Vehicle</b>: <br>" . $this->vehicle_obj->getDisplay();//should put this in containing div
         }
         $sale .= "</div>";
         return $sale;
