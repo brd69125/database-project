@@ -41,10 +41,10 @@ class Nav_Bar {
         //choose tab
         switch ($this->selected_page){
             case "sales":
-                ;
+                $page .= Sales_Page::getDisplay();
                 break;
             case "services":
-                ;
+                $page .= Services_Page::getDisplay();
                 break;
             default :
                 $page .= self::getHomePage();//home

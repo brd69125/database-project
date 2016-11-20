@@ -11,7 +11,7 @@
  *
  * @author owner
  */
-class service_tickets extends Database{
+class Service_Tickets extends Database{
     //put your code here
     protected $fields = ["id","pickup_date","arrival_date","completed_date","tasks","work_time_est","price_est","bill","vehicle","mechanic","arr_mile","dep_mile"];
     protected $tableName = "service_ticket";

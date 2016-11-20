@@ -11,7 +11,7 @@
  *
  * @author owner
  */
-class vehicle extends Database{
+class Vehicle extends Database{
     //put your code here
     protected $fields = ["id","make","model","year","price"];
     protected $tableName = "vehicle";

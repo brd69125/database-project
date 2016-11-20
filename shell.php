@@ -25,6 +25,8 @@ session_start();    //start $_SESSION
 function getIncludes(){
     include_once("database.class.php");
     include_once("nav_bar.class.php");
+    include_once("sales_page.class.php");
+    include_once("services_page.class.php");
     include_once("database/customer.class.php");
     include_once("database/sale.class.php");
     include_once("database/vehicle.class.php");

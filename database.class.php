@@ -19,6 +19,7 @@ class Database {
     //$connect variable to make connection to database
     protected $connect;
     protected $db_name = "dealership";
+    protected $password = "greenman"; //insert your password here
     protected $tableName; //to be overwritten
     //protected $id;  //assuming everything should have an id
     protected $fields = array();
@@ -27,7 +28,7 @@ class Database {
      * construct to initialize connect
      */
     public function __construct() {
-        $this->connect = mysqli_connect('localhost', 'root', 'balls', $this->db_name);
+        $this->connect = mysqli_connect('localhost', 'root', $this->password, $this->db_name);
         $this->getSQLError(); 
         return $this->connect;
     }

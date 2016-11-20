@@ -11,8 +11,16 @@
  *
  * @author owner
  */
-class bill extends Database{
+class Bill extends Database{
     //put your code here
     protected $fields = ["id","date","amount","payment"];
     protected $tableName = "bill";
+    
+    public function getDisplay(){
+        $bill = "<div>";
+        $bill .= "Date: {$this->date}<br>Amount: {$this->amount}<br>Payment Method: {$this->payment}";
+        $bill .= "</div>";
+        return $bill;
+    }
+    
 }

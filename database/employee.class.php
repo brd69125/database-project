@@ -11,7 +11,7 @@
  *
  * @author owner
  */
-class employee extends Database{
+class Employee extends Database{
     //put your code here
     protected $fields = ["id","name","email","address","phone","type"];
     protected $tableName = "employee";
