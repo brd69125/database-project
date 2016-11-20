@@ -1,0 +1,26 @@
+/* 
+    Site Wide styles
+*/
+
+.nav_bar{
+    position: fixed;
+    width: 100px;
+    height: 100%;
+    border-right: solid medium black;
+}
+
+.content{
+    margin-left: 100px;
+    padding-left: 10px;
+}
+
+.nav_button{
+    background: transparent;
+    padding: 5px;
+    display: inline-block;
+    width: 100%;
+    border: none;
+    border-bottom: solid medium black;
+    cursor: pointer;
+    
+}

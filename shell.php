@@ -39,7 +39,7 @@ function echoJavaScript(){
 
 //echo css files
 function echoCSS(){
-    //echo "<link rel='stylesheet' href='css/index.css' type='text/css'>"; 
+    echo "<link rel='stylesheet' href='css/site.css' type='text/css'>"; 
 }
 
 /**
