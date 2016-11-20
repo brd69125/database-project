@@ -20,13 +20,13 @@ class Customer extends Database{
     protected $tableName = "customer";
     
     public function getDisplay(){
-        $customer = "<div>";
-        $customer .= "Name: {$this->name}<br>";
-        $customer .= "Address: {$this->address}<br>";
-        $customer .= "Phone: {$this->phone}<br>";
-        $customer .= "Email: {$this->email}<br>";
-        $customer .= "Type: {$this->type}<br>";
-        $customer .= "</div>";
+        $customer = "<div><ul>";
+        $customer .= "<li>Name: {$this->name}</li>>";
+        $customer .= "<li>Address: {$this->address}</li>";
+        $customer .= "<li>Phone: {$this->phone}</li>";
+        $customer .= "<li>Email: {$this->email}</li>";
+        $customer .= "<li>Type: {$this->type}</li>";
+        $customer .= "</div></ul>";
         return $customer;
     }
     
