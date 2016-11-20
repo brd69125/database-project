@@ -46,16 +46,19 @@ class Sale extends Database{
     }
     
     public function getDisplay(){
-        $sale = "<div>";
-        $sale .= "<b>Date</b>: {$this->date}<br>";
-        $sale .= "<b>Custom Work</b>: {$this->custom_work}<br>";
+        $sale = "<div><ul>";
+        $sale .= "<li><b>Date</b>: {$this->date}<br></li>";
+        $sale .= "<li><b>Custom Work</b>: {$this->custom_work}<br></li>";
         if(isset($this->bill_obj)){
-            $sale .= "<b>Bill</b>: <br>" . $this->bill_obj->getDisplay();//should put this in containing div
+            $sale .= "<li><b>Bill</b>: <br>" . $this->bill_obj->getDisplay() . "</li>";//should put this in containing div
         }
         if(isset($this->vehicle_obj)){
-            $sale .= "<b>Vehicle</b>: <br>" . $this->vehicle_obj->getDisplay();//should put this in containing div
+            $sale .= "<li><b>Vehicle</b>: <br>" . $this->vehicle_obj->getDisplay()."</li>";//should put this in containing div
         }
-        $sale .= "</div>";
+        if(isset($this->customer_obj)){
+            $sale .= "<li><b>Customer</b>: <br>" . $this->customer_obj->getDisplay()."</li>";//should put this in containing div
+        }
+        $sale .= "</ul></div>";
         return $sale;
     }
 }
