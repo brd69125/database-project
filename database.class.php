@@ -229,4 +229,8 @@ class Database {
         return $fieldTypes;
     }
     
+    public function getLastInsertedId(){
+        return mysqli_insert_id($this->connect);
+    }
+    
 }

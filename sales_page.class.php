@@ -64,6 +64,7 @@ class Sales_Page {
     
     public static function getSaleForm(){
         $section = "<div><h2>Create New Sale</h2>";
+        $section .= Sale::getInsertForm();
         $section .= "</div>";
         return $section;
     }

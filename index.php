@@ -24,6 +24,9 @@
                     case "vehicle" :
                         Vehicle::processForm();
                         break;
+                    case "sale" :
+                        Sale::processForm();
+                        break;
                     default :
                         ;//do nothing, no handler exists
                 }

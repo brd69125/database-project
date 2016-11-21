@@ -61,4 +61,14 @@ class Vehicle extends Database{
             $vehicle->save();
         }
     }
+    
+    public static function getVehicleSelect(){
+        $select = "Vehicle: <select name='vehicle'>";
+        $results = (new self())->getAllRecords();
+        foreach ($results as $row) {
+            $select .= "<option value='".$row['id']."'>{$row['make']} {$row['model']} {$row['year']} \${$row['price']}</option>";
+        }
+        $select .= "</select><br>";
+        return $select;
+    }
 }

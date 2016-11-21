@@ -61,4 +61,33 @@ class Sale extends Database{
         $sale .= "</ul>";
         return $sale;
     }
+    
+    public static function getInsertForm(){
+        $form = "<form action='' method='post'>";
+        //get vehicle and customer selects
+        $form .= Customer::getCustomerSelect();
+        $form .= Vehicle::getVehicleSelect();
+        //$form .= "Date:<input type='datetime' name='date'><br>";
+        $form .= "Custom Work:<input type='text' name='custom_work'><br>";
+        $form .= Bill::getFormInputs();
+        $form .= "<button type='submit' name='insert' value='".static::$tableName."'>Submit</button>";
+        $form .= "</form>";
+        return $form;
+    }
+    
+    public static function processForm(){
+        if(isset($_POST['insert'])&&$_POST['insert']===static::$tableName){
+            $sale = new self();
+            //$sale->date = filter_input(INPUT_POST, "make", FILTER_SANITIZE_STRING); //get current time as default
+            $sale->custom_work = filter_input(INPUT_POST, "custom_work", FILTER_SANITIZE_STRING);
+            $sale->customer = filter_input(INPUT_POST, "customer", FILTER_SANITIZE_NUMBER_INT);
+            $sale->vehicle = filter_input(INPUT_POST, "vehicle", FILTER_SANITIZE_NUMBER_INT);
+            //var_dump($sale);
+            //create bill
+            $bill = Bill::processForm();
+            $sale->bill = $bill;
+            $sale->save();
+        }
+    }
+    
 }

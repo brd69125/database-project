@@ -25,4 +25,24 @@ class Bill extends Database{
         return $bill;
     }
     
+    public static function getFormInputs(){
+        $inputs = "Amount: <input type='number' name='amount'><br>"
+            . "Payment Method: <select name='payment'>"
+            . "<option value='visa'>Visa</option>"
+            . "<option value='mastercard'>MasterCard</option>"
+            . "<option value='cash'>Cash</option>"
+            . "</select><br>";
+        return $inputs;
+    }
+    
+    public static function processForm(){
+        $bill = new self();
+        $bill->amount = filter_input(INPUT_POST, "amount", FILTER_SANITIZE_NUMBER_FLOAT);
+        $bill->payment = filter_input(INPUT_POST, "payment", FILTER_SANITIZE_STRING);
+        //var_dump($bill);
+        //then save and return bill id
+        $bill->save();
+        return $bill->getLastInsertedId();
+    }
+    
 }
