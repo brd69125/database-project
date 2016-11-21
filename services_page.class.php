@@ -25,8 +25,7 @@ class Services_Page {
     public static function getMechanicList(){
         $section = "<div><h2>Current Mechanics</h2>";
         //get all mechanics
-//        $mechanics = new Employee(); 
-        $mechanics = Employee::getMechanics();
+        $mechanics = Employee::getAllMechanics();
         $section .= "<ul>";
         foreach($mechanics as $mechanic){
             $section .= "<li>{$mechanic->getDisplay()}</li>";
