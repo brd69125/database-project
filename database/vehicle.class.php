@@ -39,4 +39,21 @@ class Vehicle extends Database{
         }
         return $vehicles;
     }
+    
+    public static function getInsertForm(){
+        $form = "<form action='' method='post'>";
+        $form .= "Make:<input type='text' name='make'><br>"
+            . "Model:<input type='text' name='model'><br>"
+            . "Year:<input type='number' name='year'><br>"
+            . "Price:<input type='number' name='price'><br>";
+        $form .= "<button type='submit' name='insert' value='".static::$tableName."'>Submit</button>";
+        $form .= "</form>";
+        return $form;
+    }
+    
+    public static function processForm(){
+        if(isset($_POST['submit'])&&$_POST['submit']===static::$tableName){
+            $vehicle = new self();
+        }
+    }
 }
