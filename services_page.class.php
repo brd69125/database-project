@@ -19,17 +19,29 @@ class Services_Page {
     public static function getDisplay(){
         $page = "<h1>Services</h1>";
         $page .= self::getMechanicList();
+        $page .= self::getServiceTicketList();
         return $page;
     }
     
     public static function getMechanicList(){
         $section = "<div><h2>Current Mechanics</h2>";
         //get all mechanics
-//        $mechanics = new Employee(); 
-        $mechanics = Employee::getMechanics();
+        $mechanics = Employee::getAllMechanics();
         $section .= "<ul>";
         foreach($mechanics as $mechanic){
             $section .= "<li>{$mechanic->getDisplay()}</li>";
+        }
+        $section .= "</ul></div>";
+        return $section;
+    }
+    
+    public static function getServiceTicketList() {
+        $section = "<div><h2>Current Service Tickets</h2>";
+        //get all service Tickets
+        $service_tickets = Service_Tickets::getAllServiceTickets();
+        $section .= "<ul>";
+        foreach($service_tickets as $service_ticket){
+            $section .= "<li>{$service_ticket->getDisplay()}</li>";
         }
         $section .= "</ul></div>";
         return $section;
