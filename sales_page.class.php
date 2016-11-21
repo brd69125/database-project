@@ -22,6 +22,7 @@ class Sales_Page {
         $page .= self::getSalesList();
         $page .= self::getVehiclesList();
         $page .= self::getCustomersList();
+        $page .= self::getSaleForm();
         return $page;
     }
     
@@ -58,6 +59,12 @@ class Sales_Page {
             $section .= "<li>{$customer->getDisplay()}</li>";
         }
         $section .= "</ul></div>";
+        return $section;
+    }
+    
+    public static function getSaleForm(){
+        $section = "<div><h2>Create New Sale</h2>";
+        $section .= "</div>";
         return $section;
     }
     

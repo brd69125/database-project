@@ -19,6 +19,7 @@ class Vehicle_Page {
     public static function getDisplay(){
         $page = "<h1>Vehicles</h1>";
         $page .= self::getVehiclesList();
+        $page .= self::getVehicleForm();
         return $page;
     }
     
@@ -31,6 +32,12 @@ class Vehicle_Page {
             $section .= "<li>{$vehicle->getDisplay()}</li>";
         }
         $section .= "</ul></div>";
+        return $section;
+    }
+    
+    public static function getVehicleForm(){
+        $section = "<div><h2>Add New Vehicle</h2>";
+        $section .= "</div>";
         return $section;
     }
 }
