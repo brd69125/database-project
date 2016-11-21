@@ -17,12 +17,12 @@ class Vehicle extends Database{
     protected $tableName = "vehicle";
     
     public function getDisplay(){
-        $vehicle = "<div>";
-        $vehicle .= "Make: {$this->make}<br>";
-        $vehicle .= "Model: {$this->model}<br>";
-        $vehicle .= "Year: {$this->year}<br>";
-        $vehicle .= "Price: {$this->price}<br>";
-        $vehicle .= "</div>";
+        $vehicle = "<ul>";
+        $vehicle .= "<li>Make: {$this->make}</li>";
+        $vehicle .= "<li>Model: {$this->model}</li>";
+        $vehicle .= "<li>Year: {$this->year}</li>";
+        $vehicle .= "<li>Price: {$this->price}</li>";
+        $vehicle .= "</ul>";
         return $vehicle;
     }
     

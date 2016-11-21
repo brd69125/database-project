@@ -17,9 +17,11 @@ class Bill extends Database{
     protected $tableName = "bill";
     
     public function getDisplay(){
-        $bill = "<div>";
-        $bill .= "Date: {$this->date}<br>Amount: {$this->amount}<br>Payment Method: {$this->payment}";
-        $bill .= "</div>";
+        $bill = "<ul>";
+        $bill .= "<li>Date: {$this->date}</li>"
+        . "<li>Amount: {$this->amount}</li>"
+        . "<li>Payment Method: {$this->payment}</li>";
+        $bill .= "</ul>";
         return $bill;
     }
     
