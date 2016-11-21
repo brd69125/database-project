@@ -16,6 +16,20 @@
     <body>
         <?php
             include_once("shell.php");
+
+            //handle form submissions if needed
+            if(isset($_POST['insert'])){
+                $handler = filter_input(INPUT_POST, "insert", FILTER_SANITIZE_STRING);
+                switch($handler){
+                    case "vehicle" :
+                        Vehicle::processForm();
+                        break;
+                    default :
+                        ;//do nothing, no handler exists
+                }
+            }   
+            
+            //create nav bar and body
             $nav = new Nav_Bar();
             echo $nav->getDisplay();
             echo $nav->displayCurrentPage();

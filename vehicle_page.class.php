@@ -37,6 +37,7 @@ class Vehicle_Page {
     
     public static function getVehicleForm(){
         $section = "<div><h2>Add New Vehicle</h2>";
+        $section .= Vehicle::getInsertForm();
         $section .= "</div>";
         return $section;
     }
