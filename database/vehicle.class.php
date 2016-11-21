@@ -52,8 +52,13 @@ class Vehicle extends Database{
     }
     
     public static function processForm(){
-        if(isset($_POST['submit'])&&$_POST['submit']===static::$tableName){
+        if(isset($_POST['insert'])&&$_POST['insert']===static::$tableName){
             $vehicle = new self();
+            $vehicle->make = filter_input(INPUT_POST, "make", FILTER_SANITIZE_STRING);
+            $vehicle->model = filter_input(INPUT_POST, "model", FILTER_SANITIZE_STRING);
+            $vehicle->year = filter_input(INPUT_POST, "year", FILTER_SANITIZE_NUMBER_INT);
+            $vehicle->price = filter_input(INPUT_POST, "price", FILTER_SANITIZE_NUMBER_FLOAT);
+            $vehicle->save();
         }
     }
 }
