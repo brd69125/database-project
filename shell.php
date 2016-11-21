@@ -27,6 +27,7 @@ function getIncludes(){
     include_once("nav_bar.class.php");
     include_once("sales_page.class.php");
     include_once("services_page.class.php");
+    include_once("vehicle_page.class.php");
     include_once("database/customer.class.php");
     include_once("database/sale.class.php");
     include_once("database/vehicle.class.php");
