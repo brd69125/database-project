@@ -18,6 +18,19 @@
 class Vehicle_Page {
     public static function getDisplay(){
         $page = "<h1>Vehicles</h1>";
+        $page .= self::getVehiclesList();
         return $page;
+    }
+    
+    public static function getVehiclesList(){
+        $section = "<div><h2>Vehicles</h2>";
+        //get all sales
+        $vehicles = Vehicle::getAllVehicles();
+        $section .= "<ul>";
+        foreach($vehicles as $vehicle){
+            $section .= "<li>{$vehicle->getDisplay()}</li>";
+        }
+        $section .= "</ul></div>";
+        return $section;
     }
 }
