@@ -32,6 +32,7 @@ function getIncludes(){
     include_once("database/vehicle.class.php");
     include_once("database/service_tickets.class.php");
     include_once("database/bill.class.php");
+    include_once("database/employee.class.php");
 }
 
 //echo JS files

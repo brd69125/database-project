@@ -19,7 +19,7 @@ class Database {
     //$connect variable to make connection to database
     protected $connect;
     protected $db_name = "dealership";
-    protected $password = "greenman"; //insert your password here
+    protected $password = ""; //insert your password here
     protected $tableName; //to be overwritten
     //protected $id;  //assuming everything should have an id
     protected $fields = array();
