@@ -73,7 +73,7 @@ class Database {
     
     public function load_by_id($id){
         $select = "SELECT * from " . static::$tableName;
-        $where = "WHERE id = $id limit 1;";
+        $where = " WHERE id = $id limit 1;";
         $result = mysqli_query($this->connect, $select . $where);
         if($result){
             $row = mysqli_fetch_assoc($result);
@@ -87,7 +87,7 @@ class Database {
     
     public function load_by_field($field, $value, $operator = '=', $limit=1){
         $select = "SELECT * from " . static::$tableName;
-        $where = "WHERE $field $operator $value limit $limit;";
+        $where = " WHERE $field $operator $value limit $limit;";
         $result = mysqli_query($this->connect, $select . $where);
         if($result){
             $row = mysqli_fetch_assoc($result);
@@ -101,7 +101,7 @@ class Database {
     
     public function load_by_fields($fields = [['name'=>'','value'=>'','operator'=>'=']],$limit = 1){
         $select = "SELECT * from " . static::$tableName;
-        $where = "WHERE ";
+        $where = " WHERE ";
         $clause = [];
         foreach($fields as $field){
             array_push($clause, $field['name'] ." " . $field['operator'] . " " . $field['value']);
@@ -121,7 +121,7 @@ class Database {
     
     public function load_by_all_fields($limit = 1){
         $select = "SELECT * from " . static::$tableName;
-        $where = "WHERE ";
+        $where = " WHERE ";
         $clause = [];
         foreach($this->fields as $field){
             if(isset($this->$field)){
