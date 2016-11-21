@@ -21,6 +21,7 @@ class Sales_Page {
         $page = "<h1>Sales</h1>";
         $page .= self::getSalesList();
         $page .= self::getVehiclesList();
+        $page .= self::getCustomersList();
         return $page;
     }
     
@@ -43,6 +44,18 @@ class Sales_Page {
         $section .= "<ul>";
         foreach($vehicles as $vehicle){
             $section .= "<li>{$vehicle->getDisplay()}</li>";
+        }
+        $section .= "</ul></div>";
+        return $section;
+    }
+    
+    public static function getCustomersList(){
+        $section = "<div><h2>Customers</h2>";
+        //get all customers
+        $customers = Customer::getAllCustomers();
+        $section .= "<ul>";
+        foreach($customers as $customer){
+            $section .= "<li>{$customer->getDisplay()}</li>";
         }
         $section .= "</ul></div>";
         return $section;

@@ -30,4 +30,18 @@ class Customer extends Database{
         return $customer;
     }
     
+    public static function getAllCustomers(){
+        $customers = [];
+        $results = (new Customer())->getAllRecords();
+        //var_dump($results);
+        foreach ($results as $row){
+            $customer = new Customer();
+            foreach ($row as $index => $value){                
+                $customer->$index = $value;
+            }
+            $customers[] = $customer; //add to array
+        }
+        return $customers;
+    }
+    
 }
