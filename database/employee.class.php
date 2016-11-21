@@ -14,7 +14,7 @@
 class Employee extends Database{
     //put your code here
     protected $fields = ["id","name","email","address","phone","type"];
-    protected $tableName = "employee";
+    protected static $tableName = "employee";
 }
 
 
