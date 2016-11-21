@@ -17,7 +17,7 @@
  */
 class Customer extends Database{
     protected $fields = ["id","name","address","phone","type","email"];
-    protected $tableName = "customer";
+    protected static $tableName = "customer";
     
     public function getDisplay(){
         $customer = "<ul>";

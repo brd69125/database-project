@@ -14,7 +14,7 @@
 class Sale extends Database{
     //put your code here
     protected $fields = ["id","date","custom_work","customer","vehicle","bill"];
-    protected $tableName = "sale";
+    protected static $tableName = "sale";
     public $bill_obj; //for storing bill
     public $vehicle_obj;
     public $customer_obj;

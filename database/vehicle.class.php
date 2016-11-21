@@ -14,7 +14,7 @@
 class Vehicle extends Database{
     //put your code here
     protected $fields = ["id","make","model","year","price"];
-    protected $tableName = "vehicle";
+    protected static $tableName = "vehicle";
     
     public function getDisplay(){
         $vehicle = "<ul>";

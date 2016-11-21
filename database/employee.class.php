@@ -14,11 +14,11 @@
 class Employee extends Database{
     //put your code here
     protected $fields = ["id","name","email","address","phone","type"];
-    protected $tableName = "employee";
+    protected static $tableName = "employee";
     
     public static function getMechanics() {
         $rows = array();
-        $select = "SELECT * from $this->tableName ";
+        $select = "SELECT * from ".static::$tableName;
         $where = "WHERE type = 'mechanic'; ";
         $result = mysqli_query($this->connect, $select . $where);
         if($result->num_rows > 0){

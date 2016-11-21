@@ -20,7 +20,7 @@ class Database {
     protected $connect;
     protected $db_name = "dealership";
     protected $password = ""; //insert your password here
-    protected $tableName; //to be overwritten
+    protected static $tableName; //to be overwritten
     //protected $id;  //assuming everything should have an id
     protected $fields = array();
     public $properties = []; //dynamic properties array, not sure if this is how we want to do it
@@ -68,11 +68,11 @@ class Database {
     protected static function getConnect(){
         /*Enter Your connection credentials on line 43 mysqli_connect($host, $user, $password, $database, $port, $socket)*/
         $connect = new self();
-        return $connect;
+        return $connect->connect;
     }
     
     public function load_by_id($id){
-        $select = "SELECT * from $this->tableName ";
+        $select = "SELECT * from " . static::$tableName;
         $where = "WHERE id = $id limit 1;";
         $result = mysqli_query($this->connect, $select . $where);
         if($result){
@@ -86,7 +86,7 @@ class Database {
     }
     
     public function load_by_field($field, $value, $operator = '=', $limit=1){
-        $select = "SELECT * from $this->tableName ";
+        $select = "SELECT * from " . static::$tableName;
         $where = "WHERE $field $operator $value limit $limit;";
         $result = mysqli_query($this->connect, $select . $where);
         if($result){
@@ -100,7 +100,7 @@ class Database {
     }
     
     public function load_by_fields($fields = [['name'=>'','value'=>'','operator'=>'=']],$limit = 1){
-        $select = "SELECT * from $this->tableName ";
+        $select = "SELECT * from " . static::$tableName;
         $where = "WHERE ";
         $clause = [];
         foreach($fields as $field){
@@ -120,7 +120,7 @@ class Database {
     }
     
     public function load_by_all_fields($limit = 1){
-        $select = "SELECT * from $this->tableName ";
+        $select = "SELECT * from " . static::$tableName;
         $where = "WHERE ";
         $clause = [];
         foreach($this->fields as $field){
@@ -157,7 +157,7 @@ class Database {
     }
       
     public function idExistsInTable($id){
-        $select = "SELECT * from $this->tableName where id = $id";
+        $select = "SELECT * from " . static::$tableName . " where id = $id";
         $result = mysqli_query($this->connect, $select);
         if($result){
             return ($result->num_rows > 0);
@@ -168,7 +168,7 @@ class Database {
      * update current record
      */
     protected function update(){
-        $sql = "UPDATE `$this->tableName` SET ";
+        $sql = "UPDATE `".static::$tableName."` SET ";
         $fieldTypes = $this->fetchFieldTypes();
         $values = [];
         foreach ($this->fields as $field) {
@@ -184,7 +184,7 @@ class Database {
     }
     
     protected function insert(){
-        $sql = "INSERT into $this->tableName SET ";
+        $sql = "INSERT into ".static::$tableName." SET ";
         $fieldTypes = $this->fetchFieldTypes();
         $values = [];
         foreach ($this->fields as $field) {
@@ -207,7 +207,7 @@ class Database {
     
     public function getAllRecords(){
         $rows = array();
-        $select = "SELECT * from $this->tableName ";
+        $select = "SELECT * from " . static::$tableName;
         $result = mysqli_query($this->connect, $select);
         if($result->num_rows > 0){
             while($row = mysqli_fetch_assoc($result)) {
@@ -218,7 +218,7 @@ class Database {
     }
     
     public function fetchFieldTypes(){
-        $select = "SELECT * from $this->tableName LIMIT 1;";
+        $select = "SELECT * from ".static::$tableName." LIMIT 1;";
         $result = mysqli_query($this->connect, $select);
         $fieldInfo = mysqli_fetch_fields($result);
         $fieldTypes = [];

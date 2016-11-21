@@ -14,7 +14,7 @@
 class Bill extends Database{
     //put your code here
     protected $fields = ["id","date","amount","payment"];
-    protected $tableName = "bill";
+    protected static $tableName = "bill";
     
     public function getDisplay(){
         $bill = "<ul>";

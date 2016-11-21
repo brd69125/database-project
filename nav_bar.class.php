@@ -19,7 +19,7 @@ class Nav_Bar {
     
     protected $selected_page = "home";
     protected static $tab_key = "tab";
-    protected static $tab_list = ['home' => 'Home','sales'=>'Sales','services'=>'Services'];
+    protected static $tab_list = ['home' => 'Home','sales'=>'Sales','services'=>'Services', 'vehicles'=>'Vehicles'];
     
     public function __construct() {
         if(isset($_GET[self::$tab_key])){
@@ -45,6 +45,9 @@ class Nav_Bar {
                 break;
             case "services":
                 $page .= Services_Page::getDisplay();
+                break;
+            case "vehicles":
+                $page .= Vehicle_Page::getDisplay();
                 break;
             default :
                 $page .= self::getHomePage();//home
