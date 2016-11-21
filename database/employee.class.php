@@ -15,6 +15,20 @@ class Employee extends Database{
     //put your code here
     protected $fields = ["id","name","email","address","phone","type"];
     protected static $tableName = "employee";
+    
+    public static function getMechanics() {
+        $rows = array();
+        $select = "SELECT * from ".static::$tableName;
+        $where = "WHERE type = 'mechanic'; ";
+        $result = mysqli_query($this->connect, $select . $where);
+        if($result->num_rows > 0){
+            while($row = mysqli_fetch_assoc($result)) {
+                array_push($rows, $row);
+            }
+        }
+        return $rows;
+    }
+    
 }
 
 

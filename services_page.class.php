@@ -18,6 +18,20 @@
 class Services_Page {
     public static function getDisplay(){
         $page = "<h1>Services</h1>";
+        $page .= self::getMechanicList();
         return $page;
+    }
+    
+    public static function getMechanicList(){
+        $section = "<div><h2>Current Mechanics</h2>";
+        //get all mechanics
+//        $mechanics = new Employee(); 
+        $mechanics = Employee::getMechanics();
+        $section .= "<ul>";
+        foreach($mechanics as $mechanic){
+            $section .= "<li>{$mechanic->getDisplay()}</li>";
+        }
+        $section .= "</ul></div>";
+        return $section;
     }
 }

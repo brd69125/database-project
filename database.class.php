@@ -19,7 +19,7 @@ class Database {
     //$connect variable to make connection to database
     protected $connect;
     protected $db_name = "dealership";
-    protected $password = "greenman"; //insert your password here
+    protected $password = ""; //insert your password here
     protected static $tableName; //to be overwritten
     //protected $id;  //assuming everything should have an id
     protected $fields = array();
@@ -68,7 +68,7 @@ class Database {
     protected static function getConnect(){
         /*Enter Your connection credentials on line 43 mysqli_connect($host, $user, $password, $database, $port, $socket)*/
         $connect = new self();
-        return $connect;
+        return $connect->connect;
     }
     
     public function load_by_id($id){
