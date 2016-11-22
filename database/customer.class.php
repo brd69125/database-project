@@ -26,6 +26,7 @@ class Customer extends Database{
         $customer .= "<li>Phone: {$this->phone}</li>";
         $customer .= "<li>Email: {$this->email}</li>";
         $customer .= "<li>Type: {$this->type}</li>";
+        $customer .= "<li>Update: {$this->getUpdateForm()}</li>";
         $customer .= "</ul>";
         return $customer;
     }
@@ -65,6 +66,22 @@ class Customer extends Database{
             . "<option value='sale'>Sale</option>"
             . "<option value='service'>Service</option>"
             . "<option value='sale and service'>Sale and Service</option>"
+            . "</select><br>";
+        $form .= "<button type='submit' name='insert' value='".static::$tableName."'>Submit</button>";
+        $form .= "</form>";
+        return $form;
+    }
+    
+    public function getUpdateForm(){
+        $form = "<form action='' method='post'>";
+        $form .= "Name:<input type='text' name='name' value='{$this->name}'><br>"
+            . "Address:<input type='text' name='address' value='{$this->address}'><br>"
+            . "Phone:<input type='number' name='phone' value='{$this->phone}'><br>"
+            . "Email:<input type='email' name='email' value='{$this->email}'><br>";
+        $form .= "Customer Type:<select name='type'>"
+            . "<option value='sale'".($this->type === 'sale' ? "selected" : "").">Sale</option>"
+            . "<option value='service'".($this->type === 'service' ? "selected" : "").">Service</option>"
+            . "<option value='sale and service'".($this->type === 'sale and service' ? "selected" : "").">Sale and Service</option>"
             . "</select><br>";
         $form .= "<button type='submit' name='insert' value='".static::$tableName."'>Submit</button>";
         $form .= "</form>";
