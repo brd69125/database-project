@@ -54,4 +54,33 @@ class Customer extends Database{
         return $select;
     }
     
+    public static function getInsertForm(){
+        $form = "<form action='' method='post'>";
+        $form .= "Name:<input type='text' name='name'><br>"
+            . "Address:<input type='text' name='address'><br>"
+            . "Phone:<input type='number' name='phone'><br>"
+            . "Email:<input type='email' name='email'><br>";
+        $form .= "Customer Type:<select name='type'>"
+            . "<option disabled selected value='none'></option>"
+            . "<option value='sale'>Sale</option>"
+            . "<option value='service'>Service</option>"
+            . "<option value='sale and service'>Sale and Service</option>"
+            . "</select><br>";
+        $form .= "<button type='submit' name='insert' value='".static::$tableName."'>Submit</button>";
+        $form .= "</form>";
+        return $form;
+    }
+    
+    public static function processForm(){
+        if(isset($_POST['insert'])&&$_POST['insert']===static::$tableName){
+            $customer = new self();
+            $customer->name = filter_input(INPUT_POST, "name", FILTER_SANITIZE_STRING);
+            $customer->address = filter_input(INPUT_POST, "address", FILTER_SANITIZE_STRING);
+            $customer->phone = filter_input(INPUT_POST, "phone", FILTER_SANITIZE_NUMBER_INT);
+            $customer->email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_STRING);
+            $customer->type = filter_input(INPUT_POST, "type", FILTER_SANITIZE_STRING);
+            $customer->save();
+        }
+    }
+    
 }

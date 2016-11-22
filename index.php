@@ -27,6 +27,9 @@
                     case "sale" :
                         Sale::processForm();
                         break;
+                    case "customer" :
+                        Customer::processForm();
+                        break;
                     default :
                         ;//do nothing, no handler exists
                 }
