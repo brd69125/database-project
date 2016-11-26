@@ -24,3 +24,14 @@
     cursor: pointer;
     
 }
+
+/*unordered list db object*/
+ul{
+    border: black thin solid;
+    margin: 5px;
+    border-radius: 5px;
+    display: inline-table;
+    padding-top: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+}
