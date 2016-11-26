@@ -35,3 +35,11 @@ ul{
     padding-right: 5px;
     padding-bottom: 5px;
 }
+
+.update_form{
+    margin: 5px;
+    padding: 5px;
+    border: black thin solid;
+    border-radius: 5px;
+    background: lightsteelblue;
+}
