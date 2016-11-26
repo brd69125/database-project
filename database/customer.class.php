@@ -26,7 +26,8 @@ class Customer extends Database{
         $customer .= "<li>Phone: {$this->phone}</li>";
         $customer .= "<li>Email: {$this->email}</li>";
         $customer .= "<li>Type: {$this->type}</li>";
-        $customer .= "<li>Update: {$this->getUpdateForm()}</li>";
+        $customer .= "<li><button onclick='toggleNearestUpdateForm(this);'>Update Customer</button> "
+            . "<div class='update_form' style='display:none;'>{$this->getUpdateForm()}</div></li>";
         $customer .= "</ul>";
         return $customer;
     }

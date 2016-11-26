@@ -14,9 +14,8 @@ getIncludes();
 
 //dont echo if an ajax call
 if(!isset($_POST['AJAX'])){
-    //echoJavaScript();
+    echoJavaScript();
     echoCSS();
-    //displayHeader();
 }
 
 session_start();    //start $_SESSION
@@ -38,7 +37,8 @@ function getIncludes(){
 
 //echo JS files
 function echoJavaScript(){
-    //echo "<script src='js/ajax.js'></script>";
+    echo '<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>'; //jquery
+    echo "<script src='js/forms.js'></script>";
 }
 
 //echo css files
