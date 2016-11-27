@@ -46,11 +46,11 @@ class Customer extends Database{
         return $customers;
     }
     
-    public static function getCustomerSelect(){
+    public static function getCustomerSelect($default = "0"){
         $select = "Customer: <select name='customer'>";
         $results = (new self())->getAllRecords();
         foreach ($results as $row) {
-            $select .= "<option value='".$row['id']."'>{$row['name']} {$row['email']}</option>";
+            $select .= "<option value='".$row['id']."' ".($row['id'] == intval($default) ? "selected" : "").">{$row['name']} {$row['email']}</option>";
         }
         $select .= "</select><br>";
         return $select;

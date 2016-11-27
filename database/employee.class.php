@@ -53,11 +53,13 @@ class Employee extends Database{
         return $mechanics;
     }
     
-    public static function getMechanicSelect(){
+    public static function getMechanicSelect($default = "0"){
         $select = "Mechanic: <select name='mechanic'>";
         $results = self::getMechanicsResult();
         foreach ($results as $row) {
-            $select .= "<option value='".$row['id']."'>{$row['name']} : {$row['email']}</option>";
+            $select .= "<option value='".$row['id']."' "
+                .($row['id'] == intval($default) ? "selected" : "")
+                .">{$row['name']} : {$row['email']}</option>";
         }
         $select .= "</select><br>";
         return $select;

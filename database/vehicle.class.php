@@ -62,11 +62,13 @@ class Vehicle extends Database{
         }
     }
     
-    public static function getVehicleSelect(){
+    public static function getVehicleSelect($default = '0'){
         $select = "Vehicle: <select name='vehicle'>";
         $results = (new self())->getAllRecords();
         foreach ($results as $row) {
-            $select .= "<option value='".$row['id']."'>{$row['make']} {$row['model']} {$row['year']} \${$row['price']}</option>";
+            $select .= "<option value='".$row['id']."'"
+                .($row['id'] == intval($default) ? "selected" : "") //selected or not?
+                .">{$row['make']} {$row['model']} {$row['year']} \${$row['price']}</option>";
         }
         $select .= "</select><br>";
         return $select;
