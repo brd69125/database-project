@@ -13,12 +13,13 @@
  */
 class Service_Tickets extends Database{
     //put your code here
-    protected $fields = ["id","pickup_date","arrival_date","completed_date","tasks","work_time_est","price_est","bill","vehicle","mechanic","arr_mile","dep_mile"];
+    protected $fields = ["id","pickup_date","arrival_date","completed_date","tasks","work_time_est","price_est","bill","vehicle","mechanic","customer","arr_mile","dep_mile"];
     protected static $tableName = "service_ticket";
     public $bill_obj; //for storing bill
     public $vehicle_obj;
     public $mechanic_obj;
-    
+    public $customer_obj;
+
     public static function getAllServiceTickets() {
         $service_tickets = [];
         $results = (new Service_Tickets())->getAllRecords();
@@ -39,6 +40,10 @@ class Service_Tickets extends Database{
             $employee = new Employee();
             $employee->load_by_id($row["mechanic"]);
             $service_ticket->mechanic_obj = $employee;
+            
+            $customer = new Customer();
+            $customer->load_by_id($row["customer"]);
+            $service_ticket->customer_obj = $customer;
             
             $service_tickets[] = $service_ticket;
         }
@@ -61,6 +66,9 @@ class Service_Tickets extends Database{
         }
         if(isset($this->mechanic_obj)){
             $display .= "<li>Mechanic:" . $this->mechanic_obj->getDisplay()."</li>";//should put this in containing div
+        }
+        if(isset($this->customer_obj)){
+            $display .= "<li>Customer:" . $this->customer_obj->getDisplay()."</li>";//should put this in containing div
         }
         $display .= "<li>Arrival milage: {$this->arr_mile}</li>";
         $display .= "<li>Departure milage: {$this->dep_mile}</li>";
