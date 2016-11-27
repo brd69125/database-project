@@ -79,7 +79,7 @@ class Service_Tickets extends Database{
     }
     
     public static function getInsertForm(){
-        $form = "<form action='' method='post'>";
+        $form = "<form action='' method='post' class='insert_form'>";
         //get vehicle and customer selects
         //$form .= "Date:<input type='datetime' name='date'><br>";
         $form .= "Pick up date: <input type='date' name='pickup_date'><br>";

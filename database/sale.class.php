@@ -63,7 +63,7 @@ class Sale extends Database{
     }
     
     public static function getInsertForm(){
-        $form = "<form action='' method='post'>";
+        $form = "<form action='' method='post' class='insert_form'>";
         //get vehicle and customer selects
         $form .= Customer::getCustomerSelect();
         $form .= Vehicle::getVehicleSelect();

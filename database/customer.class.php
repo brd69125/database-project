@@ -57,7 +57,7 @@ class Customer extends Database{
     }
     
     public static function getInsertForm(){
-        $form = "<form action='' method='post'>";
+        $form = "<form action='' method='post' class='insert_form'>";
         $form .= "Name:<input type='text' name='name'><br>"
             . "Address:<input type='text' name='address'><br>"
             . "Phone:<input type='number' name='phone'><br>"

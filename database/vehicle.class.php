@@ -41,7 +41,7 @@ class Vehicle extends Database{
     }
     
     public static function getInsertForm(){
-        $form = "<form action='' method='post'>";
+        $form = "<form action='' method='post' class='insert_form'>";
         $form .= "Make:<input type='text' name='make'><br>"
             . "Model:<input type='text' name='model'><br>"
             . "Year:<input type='number' name='year'><br>"
