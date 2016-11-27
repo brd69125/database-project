@@ -69,3 +69,11 @@ ul{
     background: lightgoldenrodyellow;
     display: inline-block;
 }
+
+.insert_form input, .insert_form select{
+    margin: 5px 0px;
+}
+
+.update_form input, .update_form select{
+    margin: 3px 0px;
+}
