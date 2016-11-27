@@ -43,14 +43,6 @@ CREATE TABLE IF NOT EXISTS `service_ticket` (
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `service_ticket`
---
-
-INSERT INTO `service_ticket` (`id`, `pickup_date`, `arrival_date`, `completed_date`, `tasks`, `work_time_est`, `price_est`, `bill`, `vehicle`, `customer`, `mechanic`, `arr_mile`, `dep_mile`) VALUES
-(2, '2016-11-23', '2016-11-15', '2016-11-21', 'oil change', 5, 20000, 1, 2, 3, 1, 30000, 30200),
-(3, '2016-11-30', '2016-11-27', '2016-11-29', 'window replacement\r\noil change', 6, 30, 16, 2, 3, 1, 30000, 30000);
-
---
 -- Indexes for dumped tables
 --
 
@@ -89,3 +81,12 @@ ALTER TABLE `service_ticket`
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+--
+-- Dumping data for table `service_ticket`
+--
+
+INSERT INTO `service_ticket` (`id`, `pickup_date`, `arrival_date`, `completed_date`, `tasks`, `work_time_est`, `price_est`, `bill`, `vehicle`, `customer`, `mechanic`, `arr_mile`, `dep_mile`) VALUES
+(2, '2016-11-23', '2016-11-15', '2016-11-21', 'oil change', 5, 20000, 1, 2, 3, 1, 30000, 30200),
+(3, '2016-11-30', '2016-11-27', '2016-11-29', 'window replacement\r\noil change', 6, 30, 16, 2, 3, 1, 30000, 30000);
+
