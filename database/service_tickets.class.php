@@ -81,19 +81,18 @@ class Service_Tickets extends Database{
         $form = "<form action='' method='post'>";
         //get vehicle and customer selects
         //$form .= "Date:<input type='datetime' name='date'><br>";
-        $form .= "Pick up date: <input type='text' name='pickup_date'><br>";
-        $form .= "Arrival date: <input type='text' name='arrival_date'><br>";
-        $form .= "Completed date: <input type='text' name='completed_date'><br>";
-        $form .= "Tasks: <input type='text' name='tasks'><br>";
-        $form .= "Work time Estimate: <input type='text' name='work_time_est'><br>";
-        $form .= "Price Estimate: <input type='text' name='price_est'><br>";
+        $form .= "Pick up date: <input type='date' name='pickup_date'><br>";
+        $form .= "Arrival date: <input type='date' name='arrival_date'><br>";
+        $form .= "Completed date: <input type='date' name='completed_date'><br>";
+        $form .= "Tasks: <textarea name='tasks' style='display:block;'></textarea><br>";
+        $form .= "Work time Estimate: <input type='number' name='work_time_est'>hours<br>";
+        $form .= "Price Estimate: $<input type='number' name='price_est'><br>";
         $form .= Bill::getFormInputs();
         $form .= Vehicle::getVehicleSelect();
-        //add mechanic select
         $form .= Employee::getMechanicSelect();
         $form .= Customer::getCustomerSelect();
-        $form .= "Arrival milage: <input type='text' name='arr_mile'><br>";
-        $form .= "Departure milage: <input type='text' name='dep_mile'><br>";
+        $form .= "Arrival milage: <input type='number' name='arr_mile'><br>";
+        $form .= "Departure milage: <input type='number' name='dep_mile'><br>";
         $form .= "<button type='submit' name='insert' value='".static::$tableName."'>Submit</button>";
         $form .= "</form>";
         return $form;
@@ -118,6 +117,7 @@ class Service_Tickets extends Database{
             //create bill
             $bill = Bill::processForm();
             $service_ticket->bill = $bill;
+            //var_dump($service_ticket);
             $service_ticket->save();
         }
     }

@@ -54,7 +54,7 @@ class Employee extends Database{
     }
     
     public static function getMechanicSelect(){
-        $select = "Mechanic: <select name='vehicle'>";
+        $select = "Mechanic: <select name='mechanic'>";
         $results = self::getMechanicsResult();
         foreach ($results as $row) {
             $select .= "<option value='".$row['id']."'>{$row['name']} : {$row['email']}</option>";
