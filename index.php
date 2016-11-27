@@ -30,6 +30,9 @@
                     case "customer" :
                         Customer::processForm();
                         break;
+                    case "service_ticket" :
+                        Service_Tickets::processForm();
+                        break;
                     default :
                         ;//do nothing, no handler exists
                 }

@@ -77,4 +77,48 @@ class Service_Tickets extends Database{
         return $display;
     }
     
+    public static function getInsertForm(){
+        $form = "<form action='' method='post'>";
+        //get vehicle and customer selects
+        //$form .= "Date:<input type='datetime' name='date'><br>";
+        $form .= "Pick up date: <input type='text' name='pickup_date'><br>";
+        $form .= "Arrival date: <input type='text' name='arrival_date'><br>";
+        $form .= "Completed date: <input type='text' name='completed_date'><br>";
+        $form .= "Tasks: <input type='text' name='tasks'><br>";
+        $form .= "Work time Estimate: <input type='text' name='work_time_est'><br>";
+        $form .= "Price Estimate: <input type='text' name='price_est'><br>";
+        $form .= Bill::getFormInputs();
+        $form .= Vehicle::getVehicleSelect();
+        //add mechanic select
+        $form .= Employee::getMechanicSelect();
+        $form .= Customer::getCustomerSelect();
+        $form .= "Arrival milage: <input type='text' name='arr_mile'><br>";
+        $form .= "Departure milage: <input type='text' name='dep_mile'><br>";
+        $form .= "<button type='submit' name='insert' value='".static::$tableName."'>Submit</button>";
+        $form .= "</form>";
+        return $form;
+    }
+    
+    public static function processForm(){
+        if(isset($_POST['insert'])&&$_POST['insert']===static::$tableName){
+            $service_ticket = new self();
+            //$sale->date = filter_input(INPUT_POST, "make", FILTER_SANITIZE_STRING); //get current time as default
+            $service_ticket->pickup_date = filter_input(INPUT_POST, "pickup_date", FILTER_SANITIZE_STRING);
+            $service_ticket->arrival_date = filter_input(INPUT_POST, "arrival_date", FILTER_SANITIZE_STRING);
+            $service_ticket->completed_date = filter_input(INPUT_POST, "completed_date", FILTER_SANITIZE_STRING);
+            $service_ticket->tasks = filter_input(INPUT_POST, "tasks", FILTER_SANITIZE_STRING);
+            $service_ticket->work_time_est = filter_input(INPUT_POST, "work_time_est", FILTER_SANITIZE_NUMBER_INT);
+            $service_ticket->price_est = filter_input(INPUT_POST, "price_est", FILTER_SANITIZE_NUMBER_INT);
+            $service_ticket->arr_mile = filter_input(INPUT_POST, "arr_mile", FILTER_SANITIZE_NUMBER_INT);
+            $service_ticket->dep_mile = filter_input(INPUT_POST, "dep_mile", FILTER_SANITIZE_NUMBER_INT);
+            
+            $service_ticket->mechanic = filter_input(INPUT_POST, "mechanic", FILTER_SANITIZE_NUMBER_INT);
+            $service_ticket->vehicle = filter_input(INPUT_POST, "vehicle", FILTER_SANITIZE_NUMBER_INT);
+            $service_ticket->customer = filter_input(INPUT_POST, "customer", FILTER_SANITIZE_NUMBER_INT);
+            //create bill
+            $bill = Bill::processForm();
+            $service_ticket->bill = $bill;
+            $service_ticket->save();
+        }
+    }
 }

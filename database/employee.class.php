@@ -53,6 +53,16 @@ class Employee extends Database{
         return $mechanics;
     }
     
+    public static function getMechanicSelect(){
+        $select = "Mechanic: <select name='vehicle'>";
+        $results = self::getMechanicsResult();
+        foreach ($results as $row) {
+            $select .= "<option value='".$row['id']."'>{$row['name']} : {$row['email']}</option>";
+        }
+        $select .= "</select><br>";
+        return $select;
+    }
+    
 }
 
 
