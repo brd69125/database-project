@@ -18,7 +18,7 @@
 class Vehicle_Page {
     public static function getDisplay(){
         $page = "<h1>Vehicles</h1>";
-        $page .= self::getVehiclesList();
+        $page .= self::getVehiclesList() . "<hr>";
         $page .= self::getVehicleForm();
         return $page;
     }

@@ -19,10 +19,10 @@ class Sales_Page {
     
     public static function getDisplay(){
         $page = "<h1>Sales</h1>";
-        $page .= self::getSalesList();
-        $page .= self::getVehiclesList();
-        $page .= self::getCustomersList();
-        $page .= self::getSaleForm();
+        $page .= self::getSalesList() . "<hr>";
+        $page .= self::getVehiclesList() . "<hr>";
+        $page .= self::getCustomersList() . "<hr>";
+        $page .= self::getSaleForm() . "<hr>";
         $page .= self::getCustomerForm();
         return $page;
     }
