@@ -29,6 +29,7 @@ class Nav_Bar {
     
     public function getDisplay(){
         $display = "<form id='nav' class='nav_bar' method='get' action=''>";
+        $display .= "<img src='images/wheel.png' height='100' width='100'>";
         foreach(self::$tab_list as $index=>$title){
             $display .= self::getNavButton($index, $title) . "<br>";
         }

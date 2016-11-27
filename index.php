@@ -35,10 +35,16 @@
                 }
             }   
             
+            echo getHeader();
             //create nav bar and body
             $nav = new Nav_Bar();
             echo $nav->getDisplay();
             echo $nav->displayCurrentPage();
+            
+            function getHeader(){
+                $header = "<div class='header'><h1>Data Dealership</h1></div>";
+                return $header;
+            }
         ?>
     </body>
 </html>
