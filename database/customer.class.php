@@ -85,6 +85,7 @@ class Customer extends Database{
             . "<option value='sale and service'".($this->type === 'sale and service' ? "selected" : "").">Sale and Service</option>"
             . "</select><br>";
         $form .= "<button type='submit' name='insert' value='".static::$tableName."'>Submit</button>";
+        $form .= "<input type='hidden' name='id' value='$this->id'>";
         $form .= "</form>";
         return $form;
     }
@@ -97,6 +98,9 @@ class Customer extends Database{
             $customer->phone = filter_input(INPUT_POST, "phone", FILTER_SANITIZE_NUMBER_INT);
             $customer->email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_STRING);
             $customer->type = filter_input(INPUT_POST, "type", FILTER_SANITIZE_STRING);
+            if(isset($_POST['id'])){
+                $customer->id = filter_input(INPUT_POST, "id", FILTER_SANITIZE_NUMBER_INT);
+            }
             $customer->save();
         }
     }
