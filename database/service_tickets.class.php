@@ -72,7 +72,8 @@ class Service_Tickets extends Database{
         }
         $display .= "<li>Arrival milage: {$this->arr_mile}</li>";
         $display .= "<li>Departure milage: {$this->dep_mile}</li>";
-        
+        $display .= "<li><button onclick='toggleNearestUpdateForm(this);'>Update Ticket</button> "
+            . "<div class='update_form' style='display:none;'>{$this->getUpdateForm()}</div></li>";
         $display .= "</ul>";
         return $display;
     }
@@ -98,6 +99,28 @@ class Service_Tickets extends Database{
         return $form;
     }
     
+    public function getUpdateForm(){
+        $form = "<form action='' method='post'>";
+        //get vehicle and customer selects
+        //$form .= "Date:<input type='datetime' name='date'><br>";
+        $form .= "Pick up date: <input type='date' name='pickup_date' value='{$this->pickup_date}'><br>";
+        $form .= "Arrival date: <input type='date' name='arrival_date' value='{$this->arrival_date}'><br>";
+        $form .= "Completed date: <input type='date' name='completed_date' value='{$this->completed_date}'><br>";
+        $form .= "Tasks: <textarea name='tasks' style='display:block;'>{$this->tasks}</textarea><br>";
+        $form .= "Work time Estimate: <input type='number' name='work_time_est' value='{$this->work_time_est}'>hours<br>";
+        $form .= "Price Estimate: $<input type='number' name='price_est' value='{$this->price_est}'><br>";
+        $form .= $this->bill_obj->getFormUpdates();
+        $form .= Vehicle::getVehicleSelect($this->vehicle);
+        $form .= Employee::getMechanicSelect($this->mechanic);
+        $form .= Customer::getCustomerSelect($this->customer);
+        $form .= "Arrival milage: <input type='number' name='arr_mile' value='{$this->arr_mile}'><br>";
+        $form .= "Departure milage: <input type='number' name='dep_mile' value='{$this->dep_mile}'><br>";
+        $form .= "<button type='submit' name='insert' value='".static::$tableName."'>Submit</button>";
+        $form .= "<input type='hidden' name='id' value='$this->id'>";
+        $form .= "</form>";
+        return $form;
+    }
+    
     public static function processForm(){
         if(isset($_POST['insert'])&&$_POST['insert']===static::$tableName){
             $service_ticket = new self();
@@ -118,6 +141,9 @@ class Service_Tickets extends Database{
             $bill = Bill::processForm();
             $service_ticket->bill = $bill;
             //var_dump($service_ticket);
+            if(isset($_POST['id'])){
+                $service_ticket->id = filter_input(INPUT_POST, "id", FILTER_SANITIZE_NUMBER_INT);
+            }
             $service_ticket->save();
         }
     }
