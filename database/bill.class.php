@@ -35,6 +35,16 @@ class Bill extends Database{
         return $inputs;
     }
     
+    public function getFormUpdates(){
+        $inputs = "Amount: <input type='number' name='amount' value='{$this->amount}'><br>"
+            . "Payment Method: <select name='payment'>"
+            . "<option value='visa' ".($this->payment === 'visa' ? "selected" : "").">Visa</option>"
+            . "<option value='mastercard' value='{$this->mastercard}' ".($this->payment === 'mastercard' ? "selected" : "").">MasterCard</option>"
+            . "<option value='cash' value='{$this->cash}' ".($this->payment === 'cash' ? "selected" : "").">Cash</option>"
+            . "</select><br>";
+        return $inputs;
+    }
+    
     public static function processForm(){
         $bill = new self();
         $bill->amount = filter_input(INPUT_POST, "amount", FILTER_SANITIZE_NUMBER_FLOAT);
