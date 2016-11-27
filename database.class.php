@@ -172,7 +172,8 @@ class Database {
         $fieldTypes = $this->fetchFieldTypes();
         $values = [];
         foreach ($this->fields as $field) {
-            if($fieldTypes[$field] >= 252 && $fieldTypes[$field] <= 254){
+            if(($fieldTypes[$field] >= 252 && $fieldTypes[$field] <= 254) //text
+                    || $fieldTypes[$field]==10){    //date
                 $value = "'".$this->$field."'";
             }else{
                 $value = $this->$field;
@@ -189,7 +190,8 @@ class Database {
         $values = [];
         foreach ($this->fields as $field) {
             if(isset($this->$field)){
-                if($fieldTypes[$field] >= 252 && $fieldTypes[$field] <= 254){
+                if(($fieldTypes[$field] >= 252 && $fieldTypes[$field] <= 254) //text
+                    || $fieldTypes[$field]==10){    //date
                     $value = "'".$this->$field."'";
                 }else{
                     $value = $this->$field;
