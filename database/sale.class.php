@@ -66,7 +66,7 @@ class Sale extends Database{
         $form = "<form action='' method='post' class='insert_form'>";
         //get vehicle and customer selects
         $form .= Customer::getCustomerSelect();
-        $form .= Vehicle::getVehicleSelect();
+        $form .= Vehicle::getUnsoldVehicleSelect();
         //$form .= "Date:<input type='datetime' name='date'><br>";
         $form .= "Custom Work:<input type='text' name='custom_work'><br>";
         $form .= Bill::getFormInputs();

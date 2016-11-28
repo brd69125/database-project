@@ -40,6 +40,33 @@ class Vehicle extends Database{
         return $vehicles;
     }
     
+    public function getAllUnsoldRecords(){
+        $rows = array();
+        $select = "SELECT ".static::$tableName.".* from " . static::$tableName
+            . " WHERE id NOT IN (SELECT vehicle FROM sale);";
+        $result = mysqli_query($this->connect, $select);
+        if($result->num_rows > 0){
+            while($row = mysqli_fetch_assoc($result)) {
+                array_push($rows, $row);
+            }
+        }
+        return $rows;
+    }
+    
+    public static function getAllUnsoldVehicles(){
+        $vehicles = [];
+        $results = (new Vehicle())->getAllUnsoldRecords();
+        //var_dump($results);
+        foreach ($results as $row){
+            $vehicle = new Vehicle();
+            foreach ($row as $index => $value){                
+                $vehicle->$index = $value;
+            }
+            $vehicles[] = $vehicle; //add to array
+        }
+        return $vehicles;
+    }
+    
     public static function getInsertForm(){
         $form = "<form action='' method='post' class='insert_form'>";
         $form .= "Make:<input type='text' name='make'><br>"
@@ -65,6 +92,18 @@ class Vehicle extends Database{
     public static function getVehicleSelect($default = '0'){
         $select = "Vehicle: <select name='vehicle'>";
         $results = (new self())->getAllRecords();
+        foreach ($results as $row) {
+            $select .= "<option value='".$row['id']."'"
+                .($row['id'] == intval($default) ? "selected" : "") //selected or not?
+                .">{$row['make']} {$row['model']} {$row['year']} \${$row['price']}</option>";
+        }
+        $select .= "</select><br>";
+        return $select;
+    }
+    
+    public static function getUnsoldVehicleSelect($default = '0'){
+        $select = "Vehicle: <select name='vehicle'>";
+        $results = (new self())->getAllUnsoldRecords();
         foreach ($results as $row) {
             $select .= "<option value='".$row['id']."'"
                 .($row['id'] == intval($default) ? "selected" : "") //selected or not?
