@@ -13,7 +13,7 @@
  */
 class Vehicle extends Database{
     //put your code here
-    protected $fields = ["id","make","model","year","price"];
+    protected $fields = ["id","make","model","year","price","vin"];
     protected static $tableName = "vehicle";
     
     public function getDisplay(){
@@ -22,6 +22,7 @@ class Vehicle extends Database{
         $vehicle .= "<li>Model: {$this->model}</li>";
         $vehicle .= "<li>Year: {$this->year}</li>";
         $vehicle .= "<li>Price: {$this->price}</li>";
+        $vehicle .= "<li>Vin: {$this->vin}</li>";
         $vehicle .= "</ul>";
         return $vehicle;
     }
@@ -72,7 +73,8 @@ class Vehicle extends Database{
         $form .= "Make:<input type='text' name='make'><br>"
             . "Model:<input type='text' name='model'><br>"
             . "Year:<input type='number' name='year'><br>"
-            . "Price:<input type='number' name='price'><br>";
+            . "Price:<input type='number' name='price'><br>"
+            . "Vin:<input type='text' name='vin'><br>";
         $form .= "<button type='submit' name='insert' value='".static::$tableName."'>Submit</button>";
         $form .= "</form>";
         return $form;
@@ -85,6 +87,7 @@ class Vehicle extends Database{
             $vehicle->model = filter_input(INPUT_POST, "model", FILTER_SANITIZE_STRING);
             $vehicle->year = filter_input(INPUT_POST, "year", FILTER_SANITIZE_NUMBER_INT);
             $vehicle->price = filter_input(INPUT_POST, "price", FILTER_SANITIZE_NUMBER_FLOAT);
+            $vehicle->vin = filter_input(INPUT_POST, "vin", FILTER_SANITIZE_STRING);
             $vehicle->save();
         }
     }
@@ -95,7 +98,7 @@ class Vehicle extends Database{
         foreach ($results as $row) {
             $select .= "<option value='".$row['id']."'"
                 .($row['id'] == intval($default) ? "selected" : "") //selected or not?
-                .">{$row['make']} {$row['model']} {$row['year']} \${$row['price']}</option>";
+                .">{$row['make']} {$row['model']} {$row['year']} \${$row['price']} {$row['vin']}</option>";
         }
         $select .= "</select><br>";
         return $select;
@@ -107,7 +110,7 @@ class Vehicle extends Database{
         foreach ($results as $row) {
             $select .= "<option value='".$row['id']."'"
                 .($row['id'] == intval($default) ? "selected" : "") //selected or not?
-                .">{$row['make']} {$row['model']} {$row['year']} \${$row['price']}</option>";
+                .">{$row['make']} {$row['model']} {$row['year']} \${$row['price']} {$row['vin']}</option>";
         }
         $select .= "</select><br>";
         return $select;
